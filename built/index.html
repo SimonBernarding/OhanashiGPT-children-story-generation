@@ -4,127 +4,193 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dynamic Text-to-Speech</title>
+    <title>Create Stories</title>
 
-    <style>
-        #content {
-            max-height: 500px;
-            overflow-y: auto;
-            border: 1px solid #ccc;
-            padding: 10px;
-        }
+    <link rel="icon" href="image/favicon.ico" sizes="48x48">
+    <link rel="icon" href="image/favicon.svg" sizes="any" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="image/apple-touch-icon.png">
 
-        .chunk {
-            margin-bottom: 20px;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="/built/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="/built/css/system.css">
+    <link rel="stylesheet" type="text/css" href="/built/css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 </head>
 
-<body>
-    <h1>Androcles and the Lion</h1>
-    <select id="speakerSelect">
-        <option value="">Select a speaker</option>
-    </select>
-    <button id="startButton" type="button">Start Processing</button>
-    <div id="content"></div>
+<div id="menu" class="flex">
+    <a href="" title="Go to Homepage">
+        <img src="image/bookmark.png" alt="Logo">
+        <img src="image/logo.png" alt="Logo">
+
+    </a>
+</div>
+
+<body id="index">
+    <div class="header-content">
+
+        <!--
+        <div class="title">
+            <h1><span>Stories</span><br>Create</h1>
+        </div>
+    -->
+        <div class="buttons-container">
+            <a href="#interface"><button id="scrollToInterface" class="main-button">Start here</button></a>
+            <a href="/built/content/gallery.html"><button class="ghost-button">Explore</button></a>
+        </div>
+        <div class="info-box">
+            <div class="info-column">
+                <h3>Create</h3>
+                <p>Customized stories for your child.<br>Include personal info. Duration. Topic.</p>
+            </div>
+            <div class="info-column">
+                <h3>Listen</h3>
+                <p>Let an AI read the story to your child.<br>In your own voice.</p>
+            </div>
+            <div class="info-column">
+                <h3>Enjoy</h3>
+                <p>Explore already generated stories.<br>Or extend them to your child's liking.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="interface" class="interface">
+        <div class="column left-column">
+            <h2>Story</h2>
+            <div class="input-group">
+                <label for="storyTopic">Topic</label>
+                <input type="text" id="storyTopic" name="storyTopic" placeholder="e.g. Adventures of a female knight">
+                <label for="storyTopic">optional</label>
+            </div>
+            <div class="input-group">
+                <div class="slider-container">
+                    <label for="storyLength">Duration</label>
+                    <input type="range" id="storyLength" name="storyLength" min="2" max="20" step="1" value="4">
+                    <div class="slider-thumb">
+                        <span id="sliderValue"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="input-group">
+                <label for="storyMaincharacter">Main Character</label>
+                <input type="text" id="storyMaincharacter" name="storyMaincharacter"
+                    placeholder="e.g. Lilly, the knight">
+                <label for="storyMaincharacter">optional</label>
+            </div>
+            <div class="input-group">
+                <label for="storySetting">Setting</label>
+                <input type="text" id="storySetting" name="storySetting" placeholder="e.g. in the forest">
+                <label for="storySetting">optional</label>
+            </div>
+            <div class="input-group">
+                <label for="storyPrompt">Individual Command</label>
+                <textarea id="storyPrompt" name="storyPrompt" rows="3"
+                    placeholder="e.g. Ask her to go to the castle."></textarea>
+                <label for="storyPrompt">optional</label>
+            </div>
+            <div class="input-group">
+                <label id="moralLessonLabel">Moral Lessons</label>
+                <div class="checkbox-grid" role="group" aria-labelledby="moralLessonLabel">
+                    <label><input type="checkbox" name="moralLesson" value="friendship"> Friendship</label>
+                    <label><input type="checkbox" name="moralLesson" value="diversity"> Diversity</label>
+                    <label><input type="checkbox" name="moralLesson" value="empathy"> Empathy</label>
+                    <label><input type="checkbox" name="moralLesson" value="respect"> Respect</label>
+                    <label><input type="checkbox" name="moralLesson" value="courage"> Courage</label>
+                    <label><input type="checkbox" name="moralLesson" value="honesty"> Honesty</label>
+                    <label><input type="checkbox" name="moralLesson" value="teamwork"> Teamwork</label>
+                    <label><input type="checkbox" name="moralLesson" value="kindness"> Kindness</label>
+                    <label><input type="checkbox" name="moralLesson" value="integrity"> Integrity</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="right-column">
+            <div class="child-section">
+                <h2>Child</h2>
+                <div class="input-group">
+                    <label for="childName">Child's Name</label>
+                    <input type="text" id="childName" name="childName" placeholder="e.g. Alice">
+                    <label for="childName">optional</label>
+                </div>
+                <div class="input-group">
+                    <label for="language">Language</label>
+                    <select id="language" name="language">
+                        <option value="en">English</option>
+                        <option value="es">Spanish</option>
+                        <option value="fr">French</option>
+                        <option value="de">German</option>
+                        <option value="it">Italian</option>
+                        <option value="pl">Polish</option>
+                    </select>
+                    <label for="language" class="required">required</label>
+                </div>
+                <div class="input-group">
+                    <label for="childAge">Age</label>
+                    <div class="slider-container">
+                        <input type="range" id="childAge" name="childAge" min="1" max="4" step="1">
+                        <div class="slider-thumb"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="speaker-section">
+                <h2>Speaker</h2>
+                <div class="input-group">
+                    <label for="speakerSelect">Select a Speaker</label>
+                    <select id="speakerSelect">
+                        <option value="standard" selected>Standard</option>
+                    </select>
+                    <label for="speakerSelect" class="required">required</label>
+                </div>
+
+                <div class="input-group" id="newSpeakerSection" style="display: none;">
+                    <label for="speakerName">Enter your Name</label>
+                    <input type="text" id="speakerName" name="speakerName" placeholder="e.g. Martha">
+                    <label for="speakerSelect" class="required">required</label>
+                </div>
+                <div id="uploadSection">
+                    <div class="input-group" style="display: none;">
+                        <label for="audioFileInput">Option 1: Upload Voice Sample</label>
+                        <input type="file" id="audioFileInput" accept="audio/*" class="btn btn-outline" lang="en">
+                    </div>
+                </div>
+                <div id="recordingSection">
+                    <div class="input-group">
+                        <label for="audioFileInput">Option 2: Record Voice Sample</label>
+                        <div class="flex record-container">
+                            <button id="startRecord" class="btn btn-primary">Start Recording</button>
+                            <button id="stopRecord" class="btn btn-secondary" disabled>Stop Recording</button>
+                            <div id="readingExample">
+                                <p>
+                                    <b>Read slowly:</b> "Once upon a time, in a magical forest, there lived a kind
+                                    little fairy named Lilly. She had shimmering wings and a heart full of dreams."
+                                </p>
+                            </div>
+                            <audio id="audioPlayback" controls style="display: none;"></audio>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <div class="button-container">
+        <button id="generateStoryButton" type="button">Generate Story</button>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <nav class="footer-nav">
+                <a
+                    href="https://docs.google.com/presentation/d/10E5n8dJJlFtOqcsxG5SQlMJbo9P4FkSRuXWOIntEC5I/edit#slide=id.g2f57badc680_0_17">Presentation</a>
+                <a href="https://github.com/merekat/children-stories">How the AI Works</a>
+                <a href="content/about.html">About Us</a>
+            </nav>
+        </div>
+    </footer>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            const startButton = $('#startButton');
-            const content = $('#content');
-
-            const speakerSelect = $('#speakerSelect');
-
-            const loadingMessage = $('<span id="loadingMessage">Data processing ...</span>').hide();
-            startButton.after(loadingMessage);
-
-            let eventSource;
-            let audioPlayers = [];
-
-            const backendUrl = 'http://127.0.0.1:5000';
-
-            // Load speaker options
-            $.getJSON(`${backendUrl}/speaker`, function (data) {
-                console.log("Received speaker data:", data);
-                if (data.speakers && data.speakers.length > 0) {
-                    data.speakers.forEach(function (speaker) {
-                        speakerSelect.append($('<option></option>').val(speaker).text(speaker));
-                    });
-                } else {
-                    console.log("No speakers found in the data.");
-                }
-            }).fail(function (jqxhr, textStatus, error) {
-                console.log("Request Failed: " + textStatus + ", " + error);
-            });
-
-            startButton.on('click', function (event) {
-                event.preventDefault();
-                const selectedSpeaker = speakerSelect.val();
-                if (!selectedSpeaker) {
-                    alert('Please select a speaker');
-                    return;
-                }
-
-                if (eventSource) {
-                    eventSource.close();
-                }
-
-                content.empty();
-                audioPlayers = [];
-                loadingMessage.show();
-
-                eventSource = new EventSource(
-                    `${backendUrl}/process?speaker=${selectedSpeaker}`);
-
-
-                eventSource.onmessage = function (event) {
-                    const data = JSON.parse(event.data);
-                    console.log("Received data:", data);
-                    const chunkDiv = document.createElement('div');
-                    chunkDiv.className = 'chunk';
-                    chunkDiv.innerHTML = `
-                <p>${data.text}</p>
-                <audio controls>
-                    <source src="${backendUrl}${data.audio}" type="audio/wav">
-                    Your browser does not support the audio element.
-                </audio>
-            `;
-                    content.append(chunkDiv);
-
-                    const audioPlayer = chunkDiv.querySelector('audio');
-                    audioPlayers.push(audioPlayer);
-
-                    audioPlayer.addEventListener('ended', function () {
-                        const currentIndex = audioPlayers.indexOf(this);
-                        if (currentIndex < audioPlayers.length - 1) {
-                            setTimeout(() => {
-                                audioPlayers[currentIndex + 1].play();
-                            }, 1000);
-                        }
-                    });
-                };
-
-                eventSource.onerror = function (error) {
-                    console.log('EventSource connection closed or encountered an error');
-                    eventSource.close();
-                    loadingMessage.hide();
-
-                    if (content.children().length === 0) {
-                        content.append(
-                            '<p>An error occurred while processing the text. Please try again.</p>'
-                        );
-                    }
-                };
-
-                eventSource.addEventListener('complete', function () {
-                    console.log('Processing complete');
-                    eventSource.close();
-                    loadingMessage.hide();
-                });
-            });
-        });
-    </script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <script src="/built/js/main.js"></script>
 </body>
 
 </html>

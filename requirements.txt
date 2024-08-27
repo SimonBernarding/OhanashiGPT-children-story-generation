@@ -1,19 +1,26 @@
 google-auth==1.4.2 
 ipykernel==4.6.1 
-ipython==5.5.0 
+#ipython==6.1.0 
 notebook==5.2.2 
 six==1.12.0 
-pandas==0.24.2
-pickle
 flask
 flask-cors
 flask-sse
-torch
 pydub
-torchaudio 
+torch # in case you need a special version, go to https://pytorch.org
+torchvision # in case you need a special version, go to https://pytorch.org
+torchaudio # in case you need a special version, go to https://pytorch.org
 soundfile 
 librosa
 chevron
-torch
 TTS
 flask_cors
+llama-cpp-python
+huggingface-hub
+accelerate
+git+https://github.com/huggingface/diffusers
+celery 
+redis
+accelerate
+numpy==1.26.4
+#peft # in case of LoRa usage

@@ -1,7 +1,10 @@
 {
   "speakers": [
-    "standard",
     "michel",
-    "recorded"
+    "nobu",
+    "simon",
+    "alex",
+    "deniz",
+    "trump"
   ]
 }
